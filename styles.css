@@ -1,0 +1,411 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+  /* Fondo elegante (beige + crema premium) */
+  --bg: #f6f2ee;
+  --bg2: #efe9e2;
+
+  /* Cards */
+  --card: #ffffff;
+
+  /* Texto */
+  --text: #1f1f1f;
+  --text-soft: #6b6b6b;
+
+  /* Dorado premium (menos amarillo, más elegante) */
+  --accent: #c6a75e;
+  --accent-soft: #e6d3a3;
+
+  /* Verde WhatsApp refinado */
+  --wsp: #1ebe5d;
+
+  /* Sombras más suaves */
+  --shadow-soft: rgba(0,0,0,0.06);
+  --shadow-strong: rgba(0,0,0,0.12);
+}
+
+/* BODY */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, var(--bg), var(--bg2));
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  padding-top: 110px; /* altura del header */
+
+}
+
+/* HEADER STICKY */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+
+  padding: 15px;
+  text-align: center;
+
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+
+  transition: transform 0.35s ease;
+}
+
+/* ocultar al bajar */
+header.hide {
+  transform: translateY(-100%);
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  background: white;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background: #ece6df;
+}
+
+/* SECCION */
+.seccion {
+  padding: 50px 20px;
+  scroll-margin-top: 100px;
+}
+
+/* GRID */
+.productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 25px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  background: var(--card);
+  border-radius: 22px;
+  overflow: hidden;
+
+  /* 🔥 BORDE DORADO SUAVE */
+  border: 1px solid rgba(212, 175, 55, 0.35);
+
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 18px rgba(0,0,0,0.05),
+    0 16px 35px rgba(0,0,0,0.04);
+
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ✨ EFECTO BORDE PREMIUM */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  padding: 1px;
+
+  background: linear-gradient(120deg, transparent, var(--accent), transparent);
+
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  opacity: 0.5;
+}
+
+/* HOVER PRO */
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+
+  box-shadow: 
+    0 6px 12px rgba(0,0,0,0.06),
+    0 18px 35px rgba(0,0,0,0.08),
+    0 30px 60px rgba(0,0,0,0.06);
+}
+
+/* PRECIO */
+.card::after {
+  content: attr(data-precio);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(5px);
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* IMAGEN */
+.card img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+/* 🔥 ZOOM REAL (MEJORADO) */
+.card:hover img {
+  transform: scale(1.12);
+  filter: brightness(1.05);
+}
+
+/* BOTON */
+.card a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin: 14px;
+  background: #f1fdf5;
+  color: #1a7f46;
+
+  padding: 10px;
+  font-size: 13px;
+  border-radius: 999px;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+}
+
+/* ICONO WHATSAPP */
+.icon-wsp::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231a7f46' viewBox='0 0 24 24'%3E%3Cpath d='M20.52 3.48A11.91 11.91 0 0012.04 0C5.4 0 .01 5.4.01 12.04c0 2.12.55 4.18 1.6 6L0 24l6.12-1.6a11.98 11.98 0 005.92 1.52h.01c6.64 0 12.04-5.4 12.04-12.04 0-3.21-1.25-6.23-3.57-8.4z'/%3E%3C/svg%3E") no-repeat center;
+
+  background-size: contain;
+}
+
+/* HOVER ICONO */
+.card a:hover::before {
+  filter: brightness(0) invert(1);
+}
+
+/* BOTON HOVER */
+.card a:hover {
+  background: var(--wsp);
+  color: white;
+  transform: scale(1.08);
+}
+
+/* BANNER */
+.banner {
+  position: relative;
+  height: 260px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin-bottom: 25px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 🔥 MEJORA ESCRITORIO */
+@media (min-width: 1024px) {
+  .banner {
+    height: 320px;
+  }
+
+  .banner img {
+    object-position: center 30%;
+    transform: scale(1.1);
+  }
+}
+
+/* OVERLAY PREMIUM */
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.35) 25%,
+    rgba(212,175,55,0.08) 60%,
+    transparent 100%
+  );
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+  color: white;
+}
+
+.overlay h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  letter-spacing: 0.5px;
+}
+
+header h1 {
+  letter-spacing: 1px;
+}
+
+.overlay p {
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* FLOAT */
+.float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--wsp);
+  color: white;
+  padding: 16px;
+  border-radius: 50%;
+  font-size: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 20px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 18px;
+  }
+
+  nav {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    transform: translateY(-120%);
+    transition: transform 0.35s ease;
+
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  nav.active {
+    transform: translateY(0);
+  }
+
+  nav a {
+    width: 90%;
+    text-align: center;
+    padding: 12px;
+  }
+}
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+.menu-toggle {
+  display: none;
+}
+
+@media(max-width:768px){
+  .menu-toggle{
+    display:block;
+    position:absolute;
+    right:20px;
+    top:20px;
+  }
+
+  nav{
+    position:fixed;
+    top:100px;
+    left:0;
+    width:100%;
+    background:white;
+    flex-direction:column;
+    transform:translateY(-150%);
+    transition:.3s;
+  }
+
+  nav.active{
+    transform:translateY(0);
+  }
+}
