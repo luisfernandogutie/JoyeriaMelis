@@ -405,7 +405,6 @@
 <script>
 const telefono = "59171321705";
 
-/* ================= WHATSAPP ================= */
 document.querySelectorAll(".btn-wsp").forEach(btn => {
   btn.addEventListener("click", function(e) {
     e.preventDefault();
@@ -416,14 +415,16 @@ document.querySelectorAll(".btn-wsp").forEach(btn => {
     const nombre = this.dataset.nombre || "Producto";
     const urlImagen = img ? img.src : "";
 
-    const mensaje = `Hola, quiero este producto:\n\n🛍️ ${nombre}\n📸 ${urlImagen}`;
+    const mensaje = `✨ Hola, quiero este producto:
+
+🛍️ ${nombre}
+📸 ${urlImagen}`;
 
     const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
 
     window.open(url, "_blank");
   });
 });
-
 
 /* ================= MODAL ================= */
 const modal = document.getElementById("modal");
